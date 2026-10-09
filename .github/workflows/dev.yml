@@ -51,11 +51,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.28.5
+          run_install: false
       - uses: actions/setup-node@v4
         with:
-          node-version: "14"
+          node-version: "24"
+      - run: pnpm --dir .github/node-tools install --frozen-lockfile --ignore-scripts
       - name: Prettier check
         run: |
           # if you encounter error, run the command below and commit the changes
-          npx prettier@2.3.2 --write {arrow,arrow-flight,dev,arrow-integration-testing,parquet}/**/*.md README.md CODE_OF_CONDUCT.md CONTRIBUTING.md
+          .github/node-tools/node_modules/.bin/prettier --write {arrow,arrow-flight,dev,arrow-integration-testing,parquet}/**/*.md README.md CODE_OF_CONDUCT.md CONTRIBUTING.md
           git diff --exit-code

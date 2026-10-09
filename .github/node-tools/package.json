@@ -1,0 +1,8 @@
+{
+  "name": "arrow-rs-ci-tools",
+  "private": true,
+  "packageManager": "pnpm@11.28.5",
+  "dependencies": {
+    "prettier": "2.3.2"
+  }
+}
